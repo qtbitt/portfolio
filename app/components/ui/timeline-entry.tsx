@@ -11,8 +11,10 @@ function TimelineEntry({
   isLast: boolean;
   isLatest: boolean;
 }) {
+  const details = [entry.role, entry.type].filter(Boolean).join(" / ");
+
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-3 sm:gap-5">
       <div className="flex flex-col items-center">
         <div className="relative mt-1">
           <div
@@ -29,10 +31,10 @@ function TimelineEntry({
         )}
       </div>
 
-      <div className={`flex-1 ${isLast ? "pb-0" : "pb-8"}`}>
-        <div className="group flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/4 p-5 backdrop-blur-sm">
-          <div className="flex items-start justify-between gap-3">
-            <div className="flex items-center gap-3">
+      <div className={`min-w-0 flex-1 ${isLast ? "pb-0" : "pb-8"}`}>
+        <div className="group flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/4 p-4 backdrop-blur-sm sm:p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex min-w-0 items-start gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/8">
                 <img
                   src={entry.logo}
@@ -44,31 +46,27 @@ function TimelineEntry({
                 />
               </div>
 
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-bold text-white">
-                    {entry.company}
-                  </h3>
-                </div>
-                <p className="mt-0.5 text-xs text-white/50">
-                  {entry.role} · {entry.type}
+              <div className="min-w-0">
+                <h3 className="text-sm font-bold text-white sm:text-base">
+                  {entry.company}
+                </h3>
+                <p className="mt-1 text-xs leading-relaxed text-white/55 sm:text-sm">
+                  {details}
                 </p>
               </div>
             </div>
 
-            <div className="shrink-0 text-right">
-              <p className="text-xs font-medium text-white/40">
+            <div className="flex flex-col gap-1 border-t border-white/8 pt-3 text-left sm:shrink-0 sm:border-t-0 sm:pt-0 sm:text-right">
+              <p className="text-xs font-medium tracking-[0.02em] text-white/40">
                 {entry.dateRange}
               </p>
-              <p className="mt-0.5 text-xs text-white/25">{entry.location}</p>
+              <p className="text-xs text-white/25">{entry.location}</p>
             </div>
           </div>
 
-          <p className="text-sm leading-relaxed text-white/55">
-            {entry.description}
-          </p>
+          <p className="text-sm leading-7 text-white/55">{entry.description}</p>
 
-          <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             {entry.stack && (
               <div className="flex flex-wrap gap-1.5">
                 {entry.stack.map((tech) => (
@@ -86,7 +84,7 @@ function TimelineEntry({
                 href={entry.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-auto flex shrink-0 items-center gap-1 text-xs text-white/25 transition-colors duration-200 hover:text-white/60"
+                className="inline-flex w-fit items-center gap-1 text-xs text-white/25 transition-colors duration-200 hover:text-white/60 sm:ml-auto"
               >
                 <BiLinkExternal size={11} />
                 {entry.company}

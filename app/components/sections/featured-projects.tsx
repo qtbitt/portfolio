@@ -6,78 +6,14 @@ import {
   BiChevronRight,
   BiHash,
 } from "react-icons/bi";
-import ProjectCard, { Project } from "../ui/project-card";
 import { useCallback, useEffect, useState } from "react";
 
+import ProjectCard from "../ui/project-card";
+import { projects } from "../../lib/content";
 import useEmblaCarousel from "embla-carousel-react";
 
-const projects: Project[] = [
-  {
-    title: "Portfolio Website",
-    dateRange: "March 2025 – Present",
-    description:
-      "A personal portfolio showcasing my projects and skills. Built with a focus on performance and smooth animations, featuring a dark glassmorphic aesthetic and fully responsive layout.",
-    image:
-      "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
-    stack: [
-      { iconName: "SiNextdotjs", label: "Next.js" },
-      { iconName: "SiReact", label: "React" },
-      { iconName: "SiTypescript", label: "TypeScript" },
-      { iconName: "SiTailwindcss", label: "Tailwind CSS" },
-    ],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    title: "E-Commerce Platform",
-    dateRange: "January 2025 – February 2025",
-    description:
-      "A full-stack e-commerce platform with product listings, cart management, Stripe payments, and an admin dashboard. Includes real-time inventory tracking and order management.",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-    stack: [
-      { iconName: "SiNextdotjs", label: "Next.js" },
-      { iconName: "SiTypescript", label: "TypeScript" },
-      { iconName: "SiPrisma", label: "Prisma" },
-      { iconName: "SiPostgresql", label: "PostgreSQL" },
-      { iconName: "SiStripe", label: "Stripe" },
-    ],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    title: "Real-time Chat App",
-    dateRange: "November 2024 – December 2024",
-    description:
-      "A real-time messaging application supporting private and group chats, file sharing, and read receipts. Built with a Node.js backend and Firebase for live data synchronization.",
-    image:
-      "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&q=80",
-    stack: [
-      { iconName: "SiReact", label: "React" },
-      { iconName: "SiNodedotjs", label: "Node.js" },
-      { iconName: "SiFirebase", label: "Firebase" },
-      { iconName: "SiTailwindcss", label: "Tailwind CSS" },
-    ],
-    githubUrl: "#",
-  },
-  {
-    title: "AI Study Assistant",
-    dateRange: "September 2024 – October 2024",
-    description:
-      "A web app that helps students generate flashcards, summaries, and quizzes from uploaded PDFs and notes. Integrates with OpenAI's API and stores user data with Supabase.",
-    image:
-      "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80",
-    stack: [
-      { iconName: "SiNextdotjs", label: "Next.js" },
-      { iconName: "SiPython", label: "Python" },
-      { iconName: "SiSupabase", label: "Supabase" },
-      { iconName: "SiMongodb", label: "MongoDB" },
-    ],
-    liveUrl: "#",
-  },
-];
-
 export default function FeaturedProjects() {
+  const featuredProjects = projects.filter((project) => project.featured);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "start",
@@ -99,6 +35,7 @@ export default function FeaturedProjects() {
 
   return (
     <section
+      id="projects"
       className="flex flex-col gap-4"
       data-aos="fade-up"
       data-aos-delay="0"
@@ -114,7 +51,7 @@ export default function FeaturedProjects() {
           <span className="text-sm font-medium text-white/30 tabular-nums">
             {current + 1}
             <span className="text-white/15 mx-1">/</span>
-            {projects.length}
+            {featuredProjects.length}
           </span>
           <div className="flex items-center gap-1.5">
             <button
@@ -126,7 +63,7 @@ export default function FeaturedProjects() {
             </button>
             <button
               onClick={scrollNext}
-              disabled={current === projects.length - 1}
+              disabled={current === featuredProjects.length - 1}
               className="flex items-center justify-center rounded-xl border border-white/10 bg-white/4 p-1.5 text-white/50 transition-all duration-200 hover:text-white hover:bg-white/8 hover:border-white/20 disabled:opacity-25 disabled:cursor-not-allowed"
             >
               <BiChevronRight size={16} />
@@ -138,7 +75,7 @@ export default function FeaturedProjects() {
       {/* Carousel */}
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex gap-4">
-          {projects.map((project) => (
+          {featuredProjects.map((project) => (
             <div key={project.title} className="flex-none w-full">
               <ProjectCard project={project} />
             </div>
@@ -150,7 +87,7 @@ export default function FeaturedProjects() {
       <div className="flex items-center gap-3 pt-1">
         <span className="text-sm text-white/30">Want to see more?</span>
         <a
-          href="#projects"
+          href="#my-work"
           className="group flex items-center gap-1.5 rounded-xl border border-white/10 px-3.5 py-1.5 text-sm font-semibold text-white/50 transition-all duration-200 hover:text-white hover:border-white/20 hover:bg-white/6"
         >
           More Projects

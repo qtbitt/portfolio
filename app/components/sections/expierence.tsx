@@ -1,45 +1,8 @@
 "use client";
 
-import { BiHash, BiLinkExternal } from "react-icons/bi";
-
-import { ExperienceEntry } from "@/app/types/experience-entry";
-import TechPill from "../ui/techpill";
+import { BiHash } from "react-icons/bi";
 import TimelineEntry from "../ui/timeline-entry";
-
-const experiences: ExperienceEntry[] = [
-  {
-    company: "Dynatrace",
-    logo: "/dynatrace-logo.png",
-    role: "Software Engineer Intern",
-    type: "Internship",
-    dateRange: "May 2026 - June 2026",
-    location: "Gdańsk, Poland",
-    description:
-      "Worked on the Dynatrace SaaS platform, contributing to the development of new features and performance optimizations.",
-    stack: [
-      { iconName: "SiTypescript", label: "TypeScript" },
-      { iconName: "SiGo", label: "Go" },
-    ],
-    url: "https://dynatrace.com",
-  },
-  {
-    company: "Sii",
-    logo: "/sii-logo.png",
-    role: "Frontend Developer Intern",
-    type: "Internship",
-    dateRange: "May 2025 - June 2025",
-    location: "Gdańsk, Poland",
-    description:
-      "Built a full-stack web application for hosting definitions of internet slang and memes.",
-    stack: [
-      { iconName: "SiReact", label: "React" },
-      { iconName: "SiNodedotjs", label: "Node.js" },
-      { iconName: "SiExpress", label: "Express.js" },
-      { iconName: "SiFigma", label: "Figma" },
-    ],
-    url: "https://sii.pl",
-  },
-];
+import { experience } from "@/app/lib/content";
 
 function Experience() {
   return (
@@ -54,11 +17,11 @@ function Experience() {
       </h2>
 
       <div className="flex flex-col">
-        {experiences.map((entry, i) => (
+        {experience.map((entry, i) => (
           <TimelineEntry
             key={entry.company}
             entry={entry}
-            isLast={i === experiences.length - 1}
+            isLast={i === experience.length - 1}
             isLatest={i === 0}
           />
         ))}

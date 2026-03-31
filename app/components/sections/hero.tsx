@@ -1,28 +1,25 @@
 "use client";
 
+import * as Flags from "country-flag-icons/react/3x2";
+
 import { BiCodeAlt, BiCurrentLocation, BiGlobe } from "react-icons/bi";
 import { useEffect, useRef, useState } from "react";
 
-import Flags from "country-flag-icons/react/3x2";
+import { identity } from "@/app/lib/content";
 
-// Parallax config
 const PARALLAX_ENABLED = true;
 
-/** How many px the layers shift at maximum mouse offset (edge of hero) */
 const PARALLAX_STRENGTH = {
-  background: 6, // banner-empty.png — moves least
-  person: 10, // ts.png        — moves most (foreground)
+  background: 6,
+  person: 10,
 };
 
-/** Starting position of the ts.png overlay (CSS right / bottom, in px).
- *  Tweak these two values to reposition yourself in the banner. */
 const OVERLAY_POSITION = {
-  right: 50, // px from the right edge of the hero
-  bottom: -40, // px from the bottom edge of the hero
+  right: 50,
+  bottom: -40,
 };
 
-/** Scale of the ts.png cutout relative to the hero height */
-const OVERLAY_HEIGHT = "105%"; // e.g. "100%" fills the hero vertically
+const OVERLAY_HEIGHT = "105%";
 
 function Hero() {
   const heroRef = useRef<HTMLElement>(null);
@@ -36,15 +33,12 @@ function Hero() {
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = hero.getBoundingClientRect();
-      // Normalize -0.5 → +0.5 relative to hero centre
       const nx = (e.clientX - rect.left) / rect.width - 0.5;
       const ny = (e.clientY - rect.top) / rect.height - 0.5;
       setOffset({ x: nx, y: ny });
     };
 
-    const handleMouseLeave = () => {
-      setOffset({ x: 0, y: 0 });
-    };
+    const handleMouseLeave = () => setOffset({ x: 0, y: 0 });
 
     hero.addEventListener("mousemove", handleMouseMove);
     hero.addEventListener("mouseleave", handleMouseLeave);
@@ -64,19 +58,20 @@ function Hero() {
 
   return (
     <section
+      id="home"
       ref={heroRef}
-      className="relative overflow-hidden rounded-3xl min-h-120 flex items-center"
+      className="relative overflow-hidden rounded-3xl flex items-end md:items-center min-h-120 md:min-h-120"
       data-aos="fade-up"
       data-aos-delay="0"
     >
-      {/* Mobile - original hero with person baked in */}
+      {/* Mobile background */}
       <img
         src="/hero-banner.png"
         alt="Hero Banner"
-        className="absolute inset-0 w-full h-full object-cover scale-140 translate-x-30 md:hidden"
+        className="absolute inset-0 w-full h-full object-cover object-center md:hidden"
       />
 
-      {/* Desktop - empty banner that shifts with parallax */}
+      {/* Desktop empty banner with parallax */}
       <img
         src="/empty-banner.png"
         alt="Hero Banner"
@@ -90,7 +85,7 @@ function Hero() {
         }}
       />
 
-      {/* Person cutout overlay (desktop only) */}
+      {/* Person cutout (desktop only) */}
       <img
         src="/ts.png"
         alt=""
@@ -108,19 +103,20 @@ function Hero() {
         }}
       />
 
-      {/* Dark gradient overlay */}
-      <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-transparent rounded-3xl" />
+      {/* Gradient */}
+      <div className="absolute inset-0 rounded-3xl bg-linear-to-t from-black/90 via-black/60 to-black/30 md:bg-none" />
+      <div className="absolute inset-0 rounded-3xl hidden md:block bg-linear-to-r from-black/80 via-black/50 to-transparent" />
 
       {/* Content */}
-      <div className="relative z-20 px-10 py-12 max-w-lg">
+      <div className="relative z-20 px-6 py-8 md:px-10 md:py-12 w-full md:max-w-lg">
         <h1
-          className="text-5xl font-bold text-white leading-tight max-w-none w-max"
+          className="text-4xl md:text-5xl font-bold text-white leading-tight"
           data-aos="fade-right"
           data-aos-delay="100"
         >
           hey,{" "}
           <span className="whitespace-nowrap">
-            I&apos;m Timothy{" "}
+            I&apos;m {identity.name}{" "}
             <picture>
               <source
                 srcSet="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b/512.webp"
@@ -129,33 +125,33 @@ function Hero() {
               <img
                 src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b/512.gif"
                 alt="👋"
-                width={60}
-                height={60}
+                width={48}
+                height={48}
                 style={{ transform: "translateY(-7%)" }}
-                className="inline-block align-middle"
+                className="inline-block align-middle md:w-[60px] md:h-[60px]"
               />
             </picture>
           </span>
         </h1>
 
         <p
-          className="mt-4 text-lg text-white/80 leading-relaxed"
+          className="mt-3 md:mt-4 text-base md:text-lg text-white/80 leading-relaxed"
           data-aos="fade-right"
           data-aos-delay="200"
         >
-          Full Stack Developer from Gdańsk building web applications, currently
-          focused on React and Next.js.
+          {identity.role} from {identity.location} building web applications,
+          currently focused on React and Next.js.
         </p>
 
         <div
-          className="mt-6 rounded-2xl border border-white/20 bg-black/45 p-5 text-white shadow-xl backdrop-blur-md"
+          className="mt-4 md:mt-6 rounded-2xl border border-white/20 bg-black/45 p-4 md:p-5 text-white shadow-xl backdrop-blur-md"
           data-aos="fade-up"
           data-aos-delay="300"
         >
           <div className="flex flex-col gap-2 text-sm text-white/70">
             <p className="flex items-center gap-2">
               <BiCurrentLocation className="shrink-0" />
-              Gdańsk, Poland
+              {identity.location}
             </p>
             <p className="flex items-center gap-2">
               <BiCodeAlt className="shrink-0" />
@@ -163,7 +159,7 @@ function Hero() {
             </p>
             <p className="flex items-center gap-2">
               <BiGlobe className="shrink-0" />
-              Open to remote & local collaboration
+              {identity.availability}
             </p>
           </div>
 

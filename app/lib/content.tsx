@@ -22,7 +22,7 @@ export const identity = {
   birthDate: "2009-01-30",
   location: "Gdańsk, Poland",
   availability: "Open to remote & local collaboration",
-  email: "timothyshevchenko@gmail.com",
+  email: "tshvchnko@gmail.com",
 };
 
 // Socials

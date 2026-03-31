@@ -1,9 +1,10 @@
 import "./globals.css";
 
-import AOSInit from "./components/ui/aos-init";
-import { identity } from "./lib/content";
-import { Inter } from "next/font/google";
 import type { Metadata, Viewport } from "next";
+
+import AOSInit from "./components/ui/aos-init";
+import { Inter } from "next/font/google";
+import { identity } from "./lib/content";
 
 const inter = Inter({
   variable: "--font-inter",

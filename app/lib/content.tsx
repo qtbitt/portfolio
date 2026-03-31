@@ -143,16 +143,13 @@ export const experience: ExperienceEntry[] = [
   {
     company: "Dynatrace",
     logo: "/dynatrace-logo.png",
-    role: "Software Engineer Intern",
+    role: "Intern",
     type: "Internship",
     dateRange: "May 2026 - June 2026",
     location: "Gdańsk, Poland",
     description:
-      "Worked on the Dynatrace SaaS platform, contributing to the development of new features and performance optimizations.",
-    stack: [
-      { iconName: "SiTypescript", label: "TypeScript" },
-      { iconName: "SiGo", label: "Go" },
-    ],
+      "Going in May 2026, I will be doing a 1 month internship at Dynatrace.",
+    stack: [],
     url: "https://dynatrace.com",
   },
   {

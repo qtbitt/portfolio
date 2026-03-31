@@ -1,0 +1,9 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="6" fill="#1a1a2e"/>
+  <polygon points="16,3 28,9.5 28,22.5 16,29 4,22.5 4,9.5"
+    fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <text x="16" y="20" font-size="12" font-weight="700" fill="white"
+    text-anchor="middle"
+    font-family="system-ui,sans-serif" letter-spacing="-0.3">TS</text>
+  <circle cx="25" cy="7" r="2.5" fill="rgba(255,255,255,0.7)"/>
+</svg>
